@@ -11,7 +11,8 @@
             <div class="container">
               <h1 class="display-4">Authorization App</h1>
               <p class="lead" id="message">Please request access first to get the data.</p>
-              <div class="alert alert-danger" id="alertmessage" role="alert">
+              <div id="alertmessageVisible" class="visible">
+                <div class="alert alert-danger" id="alertmessage" role="alert"></div>
               </div>
             </div>
         </div>
@@ -69,6 +70,7 @@
                       document.getElementById("message").innerHTML = "Authenticated with <b>" + this.responseText + "</b>.";
                     } else {
                       print();
+                      print2();
                       document.getElementById("alertmessage").innerHTML = "Error in getting user data.";
                     }
                 };
@@ -81,15 +83,29 @@
             }
         }
 
+        function clean2(){
+          if($("#alertmessageVisible").hasClass("visible")){
+            $("#alertmessageVisible").removeClass("visible").addClass("invisible"); 
+          }
+        }
+
+
         function print(){
             if($("#statusVisible").hasClass("invisible")){
                 $("#statusVisible").removeClass("invisible").addClass("visible"); 
             }
         }
 
+        function print2(){
+          if($("#alertmessageVisible").hasClass("invisible")){
+            $("#alertmessageVisible").removeClass("invisible").addClass("visible"); 
+          }
+        }
+
         $(document).ready(function() {
             $("#access").click(function(e){
                 clean();
+                clean2();
                 GetAccess();
                 return false;
             });
