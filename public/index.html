@@ -11,6 +11,8 @@
             <div class="container">
               <h1 class="display-4">Authorization App</h1>
               <p class="lead" id="message">Please request access first to get the data.</p>
+              <div class="alert alert-danger" id="alertmessage" role="alert">
+              </div>
             </div>
         </div>
         <div class="row">
@@ -63,7 +65,11 @@
                 xhr2.send();
                 xhr2.onload = function (){
                     if(this.responseText!=""){
-                        document.getElementById("message").innerHTML = "Authenticated with <b>" + this.responseText + "</b>.";
+                      document.getElementById("alertmessage").innerHTML ='';
+                      document.getElementById("message").innerHTML = "Authenticated with <b>" + this.responseText + "</b>.";
+                    } else {
+                      print();
+                      document.getElementById("alertmessage").innerHTML = "Error in getting user data.";
                     }
                 };
             };
@@ -72,6 +78,12 @@
         function clean(){
             if($("#statusVisible").hasClass("visible")){
                 $("#statusVisible").removeClass("visible").addClass("invisible"); 
+            }
+        }
+
+        function print(){
+            if($("#statusVisible").hasClass("invisible")){
+                $("#statusVisible").removeClass("invisible").addClass("visible"); 
             }
         }
 
