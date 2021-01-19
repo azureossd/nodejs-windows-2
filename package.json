@@ -10,5 +10,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2"
-  }
+  },
+  "engines" : { "node" : ">=12.20.1"},
+  "engineStrict" : true
 }
