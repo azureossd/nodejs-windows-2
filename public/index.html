@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+   <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+   </head>
+   <body>
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Authorization App</h1>
+              <p class="lead" id="message">Please request access first to get the data.</p>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div id="statusVisible" class="visible">
+                <form>
+                    <div class="form-group row">
+                      <label for="username" class="col-sm-2 col-form-label">User</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="username">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="password" class="col-sm-2 col-form-label">Password</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password">
+                      </div>
+                    </div>      
+                    <div class="form-group row">
+                      <div class="col-sm-10">
+                        <button type="submit" id="access" onclick="GetAccess()" class="btn btn-primary">Sign in</button>
+                      </div>
+                    </div>
+                </form>
+            </div>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+      </div>
+
+     <script>
+        function GetAccess() {
+            var data = {
+                'client_id': document.getElementById('username').value,
+                'client_secret': document.getElementById('password').value
+            };
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('POST', '/api/oauth2', true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(JSON.stringify(data));
+            xhr.onload = function () {
+                var token = this.responseText;
+                $('#statusVisible').hide().removeClass('visible');
+                var xhr2 = new XMLHttpRequest();
+                xhr2.open('GET', "/user", true);
+                xhr2.setRequestHeader('Authorization', 'Bearer '+ token);
+                xhr2.send();
+                xhr2.onload = function (){
+                    if(this.responseText!=""){
+                        document.getElementById("message").innerHTML = "Authenticated with <b>" + this.responseText + "</b>.";
+                    }
+                };
+            };
+        }
+
+        function clean(){
+            if($("#statusVisible").hasClass("visible")){
+                $("#statusVisible").removeClass("visible").addClass("invisible"); 
+            }
+        }
+
+        $(document).ready(function() {
+            $("#access").click(function(e){
+                clean();
+                GetAccess();
+                return false;
+            });
+        });
+        </script>
+    
+    </body>
+</html>

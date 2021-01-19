@@ -1,0 +1,14 @@
+{
+  "name": "appservice.specialist.oss.nodejswin.2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "author": "edisga",
+  "license": "ISC",
+  "dependencies": {
+    "@supercharge/strings": "^1.17.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2"
+  }
+}
