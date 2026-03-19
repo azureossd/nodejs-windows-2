@@ -9,6 +9,6 @@
     "@supercharge/strings": "^1.17.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "jwt-decode": "^3.1.2"
+    "jwt-decode": "^4.0.0"
   }
 }
