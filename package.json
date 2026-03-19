@@ -6,7 +6,7 @@
   "author": "edisga",
   "license": "ISC",
   "dependencies": {
-    "@supercharge/strings": "^1.17.1",
+    "@supercharge/strings": "^2.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^4.0.0"
