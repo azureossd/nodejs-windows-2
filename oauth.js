@@ -1,8 +1,8 @@
-var jwt = require('jsonwebtoken');
-var jwt_decode = require("jwt-decode");
+const jwt = require('jsonwebtoken');
+const jwt_decode = require("jwt-decode");
 
 module.exports.GenerateToken = (host, aud, sub, user, data, pass) => {
-    var tokenJWT = jwt.sign({ 
+    const tokenJWT = jwt.sign({ 
         iss: host,
         aud: aud,
         sub: sub,
@@ -14,6 +14,6 @@ module.exports.GenerateToken = (host, aud, sub, user, data, pass) => {
 }
 
 module.exports.DecodeToken = (token) => {
-  var decoded = jwt_decode(token);
+  const decoded = jwt_decode.jwtDecode(token);
   return decoded.name;
 }

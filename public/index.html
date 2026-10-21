@@ -47,20 +47,20 @@
 
      <script>
         function GetAccess() {
-            var data = {
+            const data = {
                 'client_id': document.getElementById('username').value,
                 'client_secret': document.getElementById('password').value
             };
 
-            var xhr = new XMLHttpRequest();
+            const xhr = new XMLHttpRequest();
 
             xhr.open('POST', '/api/oauth2', true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.send(JSON.stringify(data));
             xhr.onload = function () {
-                var token = this.responseText;
+                const token = this.responseText;
                 $('#statusVisible').hide().removeClass('visible');
-                var xhr2 = new XMLHttpRequest();
+                const xhr2 = new XMLHttpRequest();
                 xhr2.open('GET', "/user", true);
                 xhr2.setRequestHeader('Authorization', 'Bearer '+ token);
                 xhr2.send();
